@@ -1,11 +1,3 @@
-use std::{
-	fs::File,
-	io::{Read, Write},
-};
-
-use serde::{Deserialize, Serialize};
-use serde_json::{from_str, json};
-
 use super::{activations::Activation, matrix::Matrix};
 
 pub struct Network<'a> {
