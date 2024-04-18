@@ -38,7 +38,7 @@ impl Matrix {
 
     pub fn multiply(&mut self, other: &Matrix) -> Matrix{
         if self.cols != other.rows {
-            panic!("Different matrix orders");
+            panic!("Different matrix orders {:?} {:?}",self,other.cols);
         }
         let mut res = Matrix::zeros(self.rows,other.cols);
         for i in 0..self.rows{
@@ -79,12 +79,12 @@ impl Matrix {
 
     pub fn subtract(&mut self, other: &Matrix) -> Matrix{
         if (self.cols != other.cols) || (self.rows!=other.rows) {
-            panic!("Different matrix orders");
+            panic!("Different matrix orders {:?} {:?}",self.cols,other);
         }
-        let mut res = Matrix::zeros(self.rows,other.cols);
+        let mut res = Matrix::zeros(self.rows,self.cols);
         for i in 0..self.rows{
             for j in 0..other.cols{
-                    res.data[i][j] += self.data[i][j] - other.data[i][j] ;
+                    res.data[i][j] = self.data[i][j] - other.data[i][j] ;
             }
         }
         res

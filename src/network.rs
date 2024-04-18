@@ -40,7 +40,7 @@ impl Network<'_> {
             current = self.weights[i].multiply(&current).add(&self.biases[i]).map(self.activation.function);
             self.data.push(current.clone());
         }
-        current.data[0].to_owned()
+        current.transpose().data[0].to_owned()
     }
 
     pub fn back_propagation(&mut self, outputs: Vec<f64>,targets: Vec<f64>){
@@ -48,7 +48,7 @@ impl Network<'_> {
 			panic!("Invalid targets length");
 		}
 
-        let mut parsed = Matrix::from(vec![outputs]);
+        let parsed = Matrix::from(vec![outputs]);
         let mut errors = Matrix::from(vec![targets]).subtract(&parsed); //it can be diff
         let mut gradients = parsed.map(self.activation.derivative);
 
